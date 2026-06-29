@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-shellwords.github.io/"
+title = "go-ruby-shellwords"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "shellsplit"
+  status = "ready"
+  blurb = "POSIX `sh` word splitting honouring single quotes, double quotes and backslash escapes, exactly as Ruby's `Shellwords.shellsplit` does."
+[[params.phases]]
+  name = "shellescape"
+  status = "ready"
+  blurb = "Escaping a single string so it survives one round of shell parsing, byte-for-byte identical to MRI (including the empty-string `''` case)."
+[[params.phases]]
+  name = "shelljoin"
+  status = "ready"
+  blurb = "Joining an array of words into a single shell-safe command line, the inverse of `shellsplit`, matching reference Ruby."
+[[params.phases]]
+  name = "Error on malformed input"
+  status = "ready"
+  blurb = "An unmatched quote raises the same `ArgumentError` Ruby raises, at the same point in the input."
+[[params.phases]]
+  name = "Round-trip fidelity"
+  status = "ready"
+  blurb = "`shellsplit(shelljoin(words)) == words` over arbitrary words, the property reference Ruby guarantees."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "A wide word corpus split, escaped and joined both here and by the system `ruby`/`shellwords`, compared byte-for-byte; 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
